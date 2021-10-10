@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.treinaweb.twprojetos.api.docs.ProjetoApiControllerDoc;
 import br.com.treinaweb.twprojetos.api.dto.EquipeDTO;
 import br.com.treinaweb.twprojetos.api.dto.ProjetoDTO;
 import br.com.treinaweb.twprojetos.api.hateoas.FuncionarioAssembler;
@@ -33,7 +34,7 @@ import br.com.treinaweb.twprojetos.servicos.ProjetoServico;
 
 @RestController
 @RequestMapping("/api/v1/projetos")
-public class ProjetoApiController {
+public class ProjetoApiController implements ProjetoApiControllerDoc {
 	
 	@Autowired
 	private ProjetoServico projetoServico;

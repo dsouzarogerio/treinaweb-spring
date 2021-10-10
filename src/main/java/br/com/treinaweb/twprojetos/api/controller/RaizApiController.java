@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.treinaweb.twprojetos.api.docs.RaizApiControllerDoc;
 import br.com.treinaweb.twprojetos.api.hateoas.RaizAssembler;
 
 /**
@@ -18,7 +19,7 @@ import br.com.treinaweb.twprojetos.api.hateoas.RaizAssembler;
 
 @RestController
 @RequestMapping("/api/v1")
-public class RaizApiController {
+public class RaizApiController implements RaizApiControllerDoc {
 
 	//método para retorno dos links
 	@GetMapping
@@ -31,7 +32,19 @@ public class RaizApiController {
 				.withRel("cargos")
 				.withType("GET");
 		
-		raizAssembler.add(cargosLink);
+		Link clientesLink = linkTo(methodOn(ClienteApiController.class).buscarTodos(null))
+				.withRel("clientes")
+				.withType("GET");
+		
+		Link funcionariosLink = linkTo(methodOn(FuncionarioApiController.class).buscarTodos(null))
+				.withRel("funcionarios")
+				.withType("GET");
+		
+		Link projetosLink = linkTo(methodOn(ProjetoApiController.class).buscarTodos(null))
+				.withRel("projetos")
+				.withType("GET");
+		
+		raizAssembler.add(cargosLink, clientesLink, funcionariosLink, projetosLink);
 		
 		return raizAssembler;
 	}
